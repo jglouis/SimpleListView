@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ListView</string>
+    <string name="image_profile">Image profile</string>
 </resources>

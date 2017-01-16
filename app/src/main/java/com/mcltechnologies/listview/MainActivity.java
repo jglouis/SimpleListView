@@ -1,5 +1,6 @@
 package com.mcltechnologies.listview;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -18,12 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<Element> elements = new ArrayList<>();
-        elements.add(new Element("Alice", "admin"));
-        elements.add(new Element("Bob", "admin"));
-        elements.add(new Element("Christophe", "admin"));
+        elements.add(new Element("Alice", "admin", Color.RED));
+        elements.add(new Element("Bob", "admin", Color.BLUE));
+        elements.add(new Element("Christophe", "admin", Color.GREEN));
 
         ListView listView = (ListView)findViewById(R.id.list_view);
-        ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, elements);
+        ListAdapter listAdapter = new ElementAdapter(this, elements);
         listView.setAdapter(listAdapter);
     }
 }
