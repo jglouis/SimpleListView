@@ -38,7 +38,8 @@ public class ElementAdapter extends ArrayAdapter<Element> {
         if (element != null) {
             viewHolder.name.setText(element.getName());
             viewHolder.description.setText(element.getDescription());
-            viewHolder.avatar.setImageDrawable(element.getAvatar());
+//            viewHolder.avatar.setImageDrawable(element.getAvatar());
+            viewHolder.avatar.setColorFilter(element.getColor());
         }
         return convertView;
     }

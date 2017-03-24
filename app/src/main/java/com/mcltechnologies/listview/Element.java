@@ -1,20 +1,15 @@
 package com.mcltechnologies.listview;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 
-/**
- * Created by JGLouis on 13/01/2017.
- */
 
-public class Element {
+class Element {
     private String name;
     private String description;
+    @ColorInt
     private int color;
 
-    public Element(String name, String description, @ColorInt int color) {
+    Element(String name, String description, @ColorInt int color) {
         this.name = name;
         this.description = description;
         this.color = color;
@@ -24,12 +19,13 @@ public class Element {
         return name;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public Drawable getAvatar() {
-        return new ColorDrawable(color);
+    @ColorInt
+    public int getColor() {
+        return color;
     }
 
     @Override
