@@ -8,6 +8,7 @@ class Element {
     private String description;
     @ColorInt
     private int color;
+    private boolean selected = false;
 
     Element(String name, String description, @ColorInt int color) {
         this.name = name;
@@ -31,5 +32,13 @@ class Element {
     @Override
     public String toString() {
         return name;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

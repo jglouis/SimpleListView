@@ -11,12 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by JGLouis on 16/01/2017.
- */
 
-public class ElementAdapter extends ArrayAdapter<Element> {
-    public ElementAdapter(Context context, List<Element> elements) {
+class ElementAdapter extends ArrayAdapter<Element> {
+    ElementAdapter(Context context, List<Element> elements) {
         super(context, 0, elements);
     }
 
@@ -34,12 +31,22 @@ public class ElementAdapter extends ArrayAdapter<Element> {
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(viewHolder);
         }
-        Element element = getItem(position);
+        final Element element = getItem(position);
         if (element != null) {
             viewHolder.name.setText(element.getName());
             viewHolder.description.setText(element.getDescription());
 //            viewHolder.avatar.setImageDrawable(element.getAvatar());
             viewHolder.avatar.setColorFilter(element.getColor());
+
+            final CustomListItem listItem = (CustomListItem) convertView;
+            listItem.setChecked(element.isSelected());
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    element.setSelected(!element.isSelected());
+                    listItem.setChecked(element.isSelected());
+                }
+            });
         }
         return convertView;
     }
