@@ -1,10 +1,13 @@
 package com.mcltechnologies.listview;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,13 +16,16 @@ import java.util.List;
 
 
 class ElementAdapter extends ArrayAdapter<Element> {
+    private List<Element> elements;
+
     ElementAdapter(Context context, List<Element> elements) {
         super(context, 0, elements);
+        this.elements = elements;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.profile_line, parent, false);
         }
@@ -47,8 +53,30 @@ class ElementAdapter extends ArrayAdapter<Element> {
                     listItem.setChecked(element.isSelected());
                 }
             });
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    removeListItem(view, position);
+                    return true;
+                }
+            });
         }
         return convertView;
+    }
+
+    private void removeListItem(View rowView, final int position) {
+        final Animation animation = AnimationUtils.loadAnimation(rowView.getContext(), R.anim.splashfadeout);
+        rowView.startAnimation(animation);
+        Handler handle = new Handler();
+        handle.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                elements.remove(position);
+                notifyDataSetChanged();
+                animation.cancel();
+            }
+        }, 1000);
     }
 
     private class ViewHolder {
