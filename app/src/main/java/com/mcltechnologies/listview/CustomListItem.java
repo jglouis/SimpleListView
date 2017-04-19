@@ -29,4 +29,8 @@ public class CustomListItem extends RelativeLayout {
         checked = isChecked;
         refreshDrawableState();
     }
+
+    public boolean isChecked() {
+        return checked;
+    }
 }
